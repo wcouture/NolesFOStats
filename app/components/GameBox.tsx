@@ -25,6 +25,7 @@ export default function GameBox(props: GameCardData) {
   const [opponent, setOpponent] = useState("");
 
   const [boxStyle, setBoxStyle] = useState({});
+  const [titleStyle, setTitleStyle] = useState({});
 
   useEffect(() => {
     setWins(props.wins);
@@ -34,8 +35,12 @@ export default function GameBox(props: GameCardData) {
     setWinPercent(percent);
 
     setOpponent(props.opponent);
+
     const boxStyle = [];
     boxStyle.push(boxCardStyle.boxBody);
+
+    const titleStyle = [];
+    titleStyle.push(boxCardStyle.cardTitle);
 
     if (props.home) {
       boxStyle.push(boxCardStyle.goldBackground);
@@ -45,15 +50,17 @@ export default function GameBox(props: GameCardData) {
 
     if (props.horizontal) {
       boxStyle.push(boxCardStyle.horizontalBox);
+      titleStyle.push(boxCardStyle.horizontalTitle);
     }
 
     setBoxStyle(boxStyle);
+    setTitleStyle(titleStyle);
   }, []);
 
   return (
     <Pressable onPress={() => OpenGameDetails(props.id)}>
       <View style={boxStyle}>
-        <Text style={[boxCardStyle.cardTitle]}>{opponent}</Text>
+        <Text style={titleStyle}>{opponent}</Text>
         <View style={[boxCardStyle.statBox]}>
           <Text style={[boxCardStyle.statLabel]}>Wins: {wins}</Text>
           <Text style={[boxCardStyle.statLabel]}>Losses: {losses}</Text>

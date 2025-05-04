@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import GameBox from "./components/GameBox";
 import PlayerBox from "./components/PlayerBox";
 import StatsBox from "./components/StatsBox";
 import {
   GameData,
-  GetGameData,
   GetGameList,
+  GetGameStats,
   GetPlayerList,
+  GetPlayerStats,
+  InitTestingData,
   PlayerData,
 } from "./Data/DataStore";
 
@@ -16,6 +19,8 @@ export default function Index() {
   const [gameList, setGameList] = useState([] as GameData[]);
 
   useEffect(() => {
+    InitTestingData();
+
     const games = GetGameList();
     setGameList(games);
 
@@ -34,22 +39,36 @@ export default function Index() {
         <Text style={stylesheet.sectionHeader}>Games</Text>
         <ScrollView horizontal style={stylesheet.cardContainer}>
           {gameList.map((game, index) => {
-            const gameDetails = GetGameData(game.id);
+            const gameDetails = GetGameStats(game.id);
             return (
-              // <GameCardData
-              //   id={game.id}
-              //   opponent={game.opponent}
-              //   home={game.home}
-
-              //   wins={gameDetails.wins}
-              // />
+              <GameBox
+                key={index}
+                id={game.id}
+                opponent={game.opponent}
+                home={game.home}
+                wins={gameDetails.wins}
+                losses={gameDetails.losses}
+              />
             );
           })}
         </ScrollView>
 
         <Text style={stylesheet.sectionHeader}>Players</Text>
         <ScrollView horizontal style={stylesheet.cardContainer}>
-          <PlayerBox id={0} wins={55} losses={68} jersey={33} />
+          {playerList.map((player, index) => {
+            const playerDetails = GetPlayerStats(player.id);
+
+            return (
+              <PlayerBox
+                key={index}
+                jersey={player.num}
+                id={player.id}
+                wins={playerDetails.wins}
+                losses={playerDetails.losses}
+                gbs={playerDetails.gbs}
+              />
+            );
+          })}
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>

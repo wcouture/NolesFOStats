@@ -18,6 +18,7 @@ export default function PlayerBox(props: PlayerCardData) {
   const [playerId, setPlayerId] = useState(-1);
   const [wins, setWins] = useState(0);
   const [losses, setLosses] = useState(0);
+  const [gbs, setGbs] = useState(0);
   const [winPercent, setWinPercent] = useState(0);
   const [jersey, setJersey] = useState(0);
 
@@ -29,6 +30,7 @@ export default function PlayerBox(props: PlayerCardData) {
 
     setWins(props.wins);
     setLosses(props.losses);
+    setGbs(props.gbs);
 
     const percent = CalculateWinPercent(props);
     setWinPercent(percent);
@@ -55,6 +57,7 @@ export default function PlayerBox(props: PlayerCardData) {
         <View style={boxCardStyle.statBox}>
           <Text style={boxCardStyle.statLabel}>Wins: {wins}</Text>
           <Text style={boxCardStyle.statLabel}>Losses: {losses}</Text>
+          <Text style={boxCardStyle.statLabel}>GBs: {gbs}</Text>
           <Text style={boxCardStyle.statLabel}>{winPercent.toFixed(2)}%</Text>
         </View>
       </View>

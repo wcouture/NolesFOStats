@@ -16,7 +16,7 @@ export const boxCardStyle = StyleSheet.create({
 
   horizontalBox: {
     flexDirection: "row",
-    height: 80,
+    height: 100,
     gap: 20,
     width: "100%",
     marginTop: 15,
@@ -31,10 +31,15 @@ export const boxCardStyle = StyleSheet.create({
   },
 
   cardTitle: {
-    fontSize: 36,
+    fontSize: 32,
     color: "white",
     fontWeight: 700,
     marginBottom: 5,
+    textAlign: "center",
+  },
+
+  horizontalTitle: {
+    fontSize: 20,
   },
 
   statBox: {
@@ -68,7 +73,6 @@ export const detailsStyle = StyleSheet.create({
   },
   scrollView: {
     width: "100%",
-    height: "60%",
   },
   listContainer: {
     width: "90%",
@@ -78,9 +82,9 @@ export const detailsStyle = StyleSheet.create({
     bottom: 0,
   },
   backButtonText: {
-    fontSize: 16,
+    fontSize: 20,
     color: "grey",
-    marginLeft: "auto",
-    marginRight: "auto",
+    width: "100%",
+    textAlign: "left",
   },
 });
