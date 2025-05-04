@@ -1,28 +1,65 @@
-import { View, Text, StyleSheet } from "react-native";
+import { router } from "expo-router";
+import { useEffect, useState } from "react";
+import { Pressable, Text, View } from "react-native";
+import { GameCardData } from "../Data/DataStore";
+import { boxCardStyle } from "../styling";
 
-export default function GameBox() {
-  return (
-    <View style={styleSheet.boxBody}>
-      <Text style={styleSheet.gameTitle}>At GT</Text>
-      <Text>38.86%</Text>
-    </View>
-  );
+function CalculateWinPercent(props: GameCardData) {
+  const totalReps = props.wins + props.losses;
+  if (totalReps <= 0) {
+    return 0;
+  }
+
+  const percent = (props.wins / totalReps) * 100;
+  return percent;
 }
 
-const styleSheet = StyleSheet.create({
-  boxBody: {
-    backgroundColor: "#782f40",
-    height: 150,
-    width: 200,
+function OpenGameDetails(id: number) {
+  router.push(`/GameDetails?id=${id}`);
+}
 
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+export default function GameBox(props: GameCardData) {
+  const [wins, setWins] = useState(0);
+  const [losses, setLosses] = useState(0);
+  const [winPercent, setWinPercent] = useState(0);
+  const [opponent, setOpponent] = useState("");
 
-  gameTitle: {
-    fontSize: 26,
-    color: "white",
-    fontWeight: 600,
-  },
-});
+  const [boxStyle, setBoxStyle] = useState({});
+
+  useEffect(() => {
+    setWins(props.wins);
+    setLosses(props.losses);
+
+    const percent = CalculateWinPercent(props);
+    setWinPercent(percent);
+
+    setOpponent(props.opponent);
+    const boxStyle = [];
+    boxStyle.push(boxCardStyle.boxBody);
+
+    if (props.home) {
+      boxStyle.push(boxCardStyle.goldBackground);
+    } else {
+      boxStyle.push(boxCardStyle.garnetBackground);
+    }
+
+    if (props.horizontal) {
+      boxStyle.push(boxCardStyle.horizontalBox);
+    }
+
+    setBoxStyle(boxStyle);
+  }, []);
+
+  return (
+    <Pressable onPress={() => OpenGameDetails(props.id)}>
+      <View style={boxStyle}>
+        <Text style={[boxCardStyle.cardTitle]}>{opponent}</Text>
+        <View style={[boxCardStyle.statBox]}>
+          <Text style={[boxCardStyle.statLabel]}>Wins: {wins}</Text>
+          <Text style={[boxCardStyle.statLabel]}>Losses: {losses}</Text>
+          <Text style={[boxCardStyle.statLabel]}>{winPercent.toFixed(2)}%</Text>
+        </View>
+      </View>
+    </Pressable>
+  );
+}

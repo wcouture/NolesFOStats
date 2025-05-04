@@ -1,7 +1,8 @@
-import { Text, View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import StatsBox from "./components/StatsBox";
 import GameBox from "./components/GameBox";
+import PlayerBox from "./components/PlayerBox";
+import StatsBox from "./components/StatsBox";
 
 export default function Index() {
   return (
@@ -13,11 +14,14 @@ export default function Index() {
         </View>
 
         <Text style={stylesheet.sectionHeader}>Games</Text>
-        <ScrollView horizontal style={stylesheet.gamesContainer}>
-          <GameBox />
+        <ScrollView horizontal style={stylesheet.cardContainer}>
+          <GameBox id={0} wins={10} losses={15} opponent={"ASU"} home={false} />
         </ScrollView>
 
         <Text style={stylesheet.sectionHeader}>Players</Text>
+        <ScrollView horizontal style={stylesheet.cardContainer}>
+          <PlayerBox id={0} wins={55} losses={68} jersey={33} />
+        </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -43,5 +47,7 @@ const stylesheet = StyleSheet.create({
     textDecorationLine: "underline",
   },
 
-  gamesContainer: {},
+  cardContainer: {
+    marginBottom: 20,
+  },
 });
