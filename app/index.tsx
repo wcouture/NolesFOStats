@@ -1,10 +1,28 @@
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import GameBox from "./components/GameBox";
 import PlayerBox from "./components/PlayerBox";
 import StatsBox from "./components/StatsBox";
+import {
+  GameData,
+  GetGameData,
+  GetGameList,
+  GetPlayerList,
+  PlayerData,
+} from "./Data/DataStore";
 
 export default function Index() {
+  const [playerList, setPlayerList] = useState([] as PlayerData[]);
+  const [gameList, setGameList] = useState([] as GameData[]);
+
+  useEffect(() => {
+    const games = GetGameList();
+    setGameList(games);
+
+    const players = GetPlayerList();
+    setPlayerList(players);
+  }, []);
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={stylesheet.safeArea}>
@@ -15,7 +33,18 @@ export default function Index() {
 
         <Text style={stylesheet.sectionHeader}>Games</Text>
         <ScrollView horizontal style={stylesheet.cardContainer}>
-          <GameBox id={0} wins={10} losses={15} opponent={"ASU"} home={false} />
+          {gameList.map((game, index) => {
+            const gameDetails = GetGameData(game.id);
+            return (
+              // <GameCardData
+              //   id={game.id}
+              //   opponent={game.opponent}
+              //   home={game.home}
+
+              //   wins={gameDetails.wins}
+              // />
+            );
+          })}
         </ScrollView>
 
         <Text style={stylesheet.sectionHeader}>Players</Text>
