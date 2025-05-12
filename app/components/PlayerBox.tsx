@@ -5,8 +5,10 @@ import { PlayerCardData } from "../Data/DataStore";
 import { boxCardStyle } from "../styling";
 
 function CalculateWinPercent(props: PlayerCardData) {
-  const totalReps = props.wins + props.losses;
-  const percent = (props.wins / totalReps) * 100;
+  const wins = parseInt(props.wins as unknown as string);
+  const losses = parseInt(props.losses as unknown as string);
+  const totalReps = wins + losses;
+  const percent = (wins / totalReps) * 100;
   return percent;
 }
 

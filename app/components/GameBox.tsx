@@ -5,12 +5,15 @@ import { GameCardData } from "../Data/DataStore";
 import { boxCardStyle } from "../styling";
 
 function CalculateWinPercent(props: GameCardData) {
-  const totalReps = props.wins + props.losses;
+  const wins = parseInt(props.wins as unknown as string);
+  const losses = parseInt(props.losses as unknown as string);
+
+  const totalReps = wins + losses;
   if (totalReps <= 0) {
     return 0;
   }
 
-  const percent = (props.wins / totalReps) * 100;
+  const percent = (wins / totalReps) * 100;
   return percent;
 }
 
@@ -28,6 +31,7 @@ export default function GameBox(props: GameCardData) {
   const [titleStyle, setTitleStyle] = useState({});
 
   useEffect(() => {
+    console.log(props.wins);
     setWins(props.wins);
     setLosses(props.losses);
 
@@ -42,7 +46,8 @@ export default function GameBox(props: GameCardData) {
     const titleStyle = [];
     titleStyle.push(boxCardStyle.cardTitle);
 
-    if (props.home) {
+    const isHome = (props.home as unknown as string) == "1";
+    if (isHome) {
       boxStyle.push(boxCardStyle.goldBackground);
     } else {
       boxStyle.push(boxCardStyle.garnetBackground);

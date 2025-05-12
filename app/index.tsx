@@ -7,10 +7,7 @@ import StatsBox from "./components/StatsBox";
 import {
   GameData,
   GetGameList,
-  GetGameStats,
   GetPlayerList,
-  GetPlayerStats,
-  InitTestingData,
   PlayerData,
 } from "./Data/DataStore";
 
@@ -19,13 +16,8 @@ export default function Index() {
   const [gameList, setGameList] = useState([] as GameData[]);
 
   useEffect(() => {
-    InitTestingData();
-
-    const games = GetGameList();
-    setGameList(games);
-
-    const players = GetPlayerList();
-    setPlayerList(players);
+    GetGameList(setGameList);
+    GetPlayerList(setPlayerList);
   }, []);
 
   return (
@@ -39,15 +31,14 @@ export default function Index() {
         <Text style={stylesheet.sectionHeader}>Games</Text>
         <ScrollView horizontal style={stylesheet.cardContainer}>
           {gameList.map((game, index) => {
-            const gameDetails = GetGameStats(game.id);
             return (
               <GameBox
                 key={index}
-                id={game.id}
+                id={game.game_id}
                 opponent={game.opponent}
                 home={game.home}
-                wins={gameDetails.wins}
-                losses={gameDetails.losses}
+                wins={game.wins}
+                losses={game.losses}
               />
             );
           })}
@@ -56,16 +47,14 @@ export default function Index() {
         <Text style={stylesheet.sectionHeader}>Players</Text>
         <ScrollView horizontal style={stylesheet.cardContainer}>
           {playerList.map((player, index) => {
-            const playerDetails = GetPlayerStats(player.id);
-
             return (
               <PlayerBox
                 key={index}
-                jersey={player.num}
-                id={player.id}
-                wins={playerDetails.wins}
-                losses={playerDetails.losses}
-                gbs={playerDetails.gbs}
+                jersey={(player as any)["number"]}
+                id={player.player_id}
+                wins={player.wins}
+                losses={player.losses}
+                gbs={player.gbs}
               />
             );
           })}
