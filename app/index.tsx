@@ -12,6 +12,10 @@ import {
 } from "./Data/DataStore";
 
 export default function Index() {
+  const [seasonWins, setSeasonWins] = useState(0);
+  const [seasonGBs, setSeasonGBs] = useState(0);
+  const [seasonLosses, setSeasonLosses] = useState(0);
+
   const [playerList, setPlayerList] = useState([] as PlayerData[]);
   const [gameList, setGameList] = useState([] as GameData[]);
 
@@ -20,12 +24,41 @@ export default function Index() {
     GetPlayerList(setPlayerList);
   }, []);
 
+  useEffect(() => {
+    const seasonStats = {
+      total_wins: 0,
+      total_losses: 0,
+      total_gbs: 0,
+    };
+
+    for (const i in playerList) {
+      const player = playerList[i];
+      const playerData: PlayerData = player as unknown as PlayerData;
+
+      const wins = parseInt(playerData.wins as unknown as string);
+      const losses = parseInt(playerData.losses as unknown as string);
+      const gbs = parseInt(playerData.gbs as unknown as string);
+
+      seasonStats.total_wins += wins;
+      seasonStats.total_losses += losses;
+      seasonStats.total_gbs += gbs;
+    }
+
+    setSeasonGBs(seasonStats.total_gbs);
+    setSeasonWins(seasonStats.total_wins);
+    setSeasonLosses(seasonStats.total_losses);
+  }, [playerList]);
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={stylesheet.safeArea}>
         <View style={{ marginBottom: 40, marginTop: 30 }}>
           <Text style={stylesheet.titleBar}>Noles FO Stats</Text>
-          <StatsBox wins={174} losses={262} gbs={114}></StatsBox>
+          <StatsBox
+            wins={seasonWins}
+            losses={seasonLosses}
+            gbs={seasonGBs}
+          ></StatsBox>
         </View>
 
         <Text style={stylesheet.sectionHeader}>Games</Text>
@@ -50,7 +83,7 @@ export default function Index() {
             return (
               <PlayerBox
                 key={index}
-                jersey={(player as any)["number"]}
+                jersey={player.number}
                 id={player.player_id}
                 wins={player.wins}
                 losses={player.losses}

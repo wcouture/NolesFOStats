@@ -76,6 +76,7 @@ export const detailsStyle = StyleSheet.create({
   },
   listContainer: {
     width: "90%",
+    height: "70%",
   },
   backButton: {
     position: "static",

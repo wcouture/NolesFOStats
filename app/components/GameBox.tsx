@@ -13,7 +13,8 @@ function CalculateWinPercent(props: GameCardData) {
     return 0;
   }
 
-  const percent = (wins / totalReps) * 100;
+  var percent = 0;
+  if (totalReps > 0) percent = (wins / totalReps) * 100;
   return percent;
 }
 
@@ -31,7 +32,6 @@ export default function GameBox(props: GameCardData) {
   const [titleStyle, setTitleStyle] = useState({});
 
   useEffect(() => {
-    console.log(props.wins);
     setWins(props.wins);
     setLosses(props.losses);
 

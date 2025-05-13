@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 type StatLine = {
   wins: number;
@@ -7,7 +7,10 @@ type StatLine = {
 };
 
 export default function StatsBox(props: StatLine) {
-  let total = props.wins + props.losses;
+  const wins = parseInt(props.wins as unknown as string);
+  const losses = parseInt(props.losses as unknown as string);
+
+  let total = wins + losses;
   var percent = 0;
   if (total > 0) percent = (props.wins / total) * 100;
 

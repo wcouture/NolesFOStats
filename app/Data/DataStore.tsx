@@ -21,8 +21,9 @@ export type PlayerCardData = {
 
 // DB data analogs
 export type PerformanceData = {
-  playerId: number;
-  gameId: number;
+  performanceId: number;
+  player_id: number;
+  game_id: number;
   wins: number;
   losses: number;
   gbs: number;
@@ -30,7 +31,7 @@ export type PerformanceData = {
 
 export type PlayerData = {
   player_id: number;
-  num: number;
+  number: number;
   name: string;
   wins: number;
   losses: number;
@@ -44,19 +45,12 @@ export type GameData = {
   home: boolean;
   wins: number;
   losses: number;
-};
-
-export type GameStatLine = {
-  id: number;
-  wins: number;
-  losses: number;
   gbs: number;
+  performance: PerformanceData[];
 };
 
-const TESTING_CONFIG = { enabled: false };
-const TESTING_games: GameData[] = [];
-const TESTING_players: PlayerData[] = [];
-const TESTING_performances: PerformanceData[][] = [];
+var CACHED_PLAYERS: PlayerData[] = [];
+var CACHED_GAMES: GameData[] = [];
 
 export async function GetGameList(setGameList: Function) {
   const response = await axios.get(
@@ -64,6 +58,7 @@ export async function GetGameList(setGameList: Function) {
   );
   const data = response.data;
   setGameList(data);
+  CACHED_GAMES = data as GameData[];
 }
 
 export async function GetPlayerList(setPlayerList: Function) {
@@ -73,296 +68,72 @@ export async function GetPlayerList(setPlayerList: Function) {
   const data = response.data;
 
   setPlayerList(data);
+  CACHED_PLAYERS = data as PlayerData[];
 }
 
-export function GetGameData(id: number): GameData {
-  if (TESTING_CONFIG.enabled) {
-    return TESTING_games[id];
-  }
-  const game: GameData = {
-    game_id: 0,
-    opponent: "",
-    home: false,
-    date: new Date(),
-    wins: 0,
-    losses: 0,
-  };
+export async function GetGameData(
+  id: number,
+  setGameData: Function,
+  setPerforamnceData: Function
+) {
+  const response = await axios.get(
+    `https://fo-stats.willc-dev.net/games/view-game?id=${id}&API=1`
+  );
 
-  return game;
+  setGameData(response.data);
+  setPerforamnceData(response.data.performance);
 }
 
-export function GetPlayerData(id: number): PlayerData {
-  if (TESTING_CONFIG.enabled) {
-    return TESTING_players[id];
-  }
+export async function GetPlayerData(
+  id: number,
+  setPlayerData: Function,
+  setPerformanceData: Function
+) {
+  const response = await axios.get(
+    `https://fo-stats.willc-dev.net/players/view-player?id=${id}&API=1`
+  );
 
-  const player: PlayerData = {
-    player_id: -1,
-    num: -1,
-    name: "",
-    wins: 0,
-    losses: 0,
-    gbs: 0,
-  };
-
-  return player;
+  setPlayerData(response.data);
+  setPerformanceData(response.data.performances);
 }
 
-export function GetPerformanceData(
-  gameId: number,
-  playerId: number
-): PerformanceData {
-  if (TESTING_CONFIG.enabled) {
-    return TESTING_performances[gameId][playerId];
-  }
-
-  const performance: PerformanceData = {
-    playerId: 0,
-    gameId: 0,
-    wins: 0,
-    losses: 0,
-    gbs: 0,
-  };
-
-  return performance;
-}
-
-export function GetGameStats(id: number) {
-  const gameStats = {
-    id: id,
-    wins: 0,
-    losses: 0,
-    gbs: 0,
-  };
-
-  return gameStats;
-}
-
-export function GetPlayerStats(id: number) {
-  const playerStats = {
-    wins: 0,
-    losses: 0,
-    gbs: 0,
-  };
-
-  for (let i = 0; i < TESTING_performances.length; i++) {
-    for (let j = 0; j < TESTING_performances[i].length; j++) {
-      const performance = TESTING_performances[i][j];
-      if (performance.playerId == id) {
-        playerStats.wins += performance.wins;
-        playerStats.losses += performance.losses;
-        playerStats.gbs += performance.gbs;
-      }
+export function GetPlayer(id: number): PlayerData {
+  for (let i = 0; i < CACHED_PLAYERS.length; i++) {
+    const player_id = parseInt(
+      CACHED_PLAYERS[i].player_id as unknown as string
+    );
+    if (player_id == id) {
+      return CACHED_PLAYERS[i];
     }
   }
 
-  return playerStats;
+  return {
+    player_id: 0,
+    number: 0,
+    name: "John Smith",
+    wins: 0,
+    losses: 0,
+    gbs: 0,
+  };
 }
 
-// export function InitTestingData() {
-//   // Add players
-//   const player1: PlayerData = { id: 0, num: 33, name: "Danny Ferber" };
-//   const player2: PlayerData = { id: 1, num: 19, name: "JD Castillo" };
-//   const player3: PlayerData = { id: 2, num: 15, name: "Pete Ancona" };
-//   const player4: PlayerData = { id: 3, num: 77, name: "Scott Chapman" };
+export function GetGame(id: number): GameData {
+  const query_id = parseInt(id as unknown as string);
+  for (let i = 0; i < CACHED_GAMES.length; i++) {
+    const game_id = parseInt(CACHED_GAMES[i].game_id as unknown as string);
+    if (game_id === query_id) {
+      return CACHED_GAMES[i];
+    }
+  }
 
-//   TESTING_players.push(player1);
-//   TESTING_players.push(player2);
-//   TESTING_players.push(player3);
-//   TESTING_players.push(player4);
-
-//   // Add games
-//   const game1: GameData = {
-//     id: 0,
-//     opponent: "Georgia Tech",
-//     date: new Date(),
-//     home: false,
-//   };
-//   const game2: GameData = {
-//     id: 1,
-//     opponent: "West Virginia",
-//     date: new Date(),
-//     home: true,
-//   };
-//   const game3: GameData = {
-//     id: 2,
-//     opponent: "Virginia Tech",
-//     date: new Date(),
-//     home: true,
-//   };
-//   const game4: GameData = {
-//     id: 3,
-//     opponent: "Utah Valley",
-//     date: new Date(),
-//     home: true,
-//   };
-//   const game5: GameData = {
-//     id: 4,
-//     opponent: "Texas",
-//     date: new Date(),
-//     home: false,
-//   };
-
-//   TESTING_games.push(game1);
-//   TESTING_performances.push([] as PerformanceData[]);
-//   TESTING_games.push(game2);
-//   TESTING_performances.push([] as PerformanceData[]);
-//   TESTING_games.push(game3);
-//   TESTING_performances.push([] as PerformanceData[]);
-//   TESTING_games.push(game4);
-//   TESTING_performances.push([] as PerformanceData[]);
-//   TESTING_games.push(game5);
-//   TESTING_performances.push([] as PerformanceData[]);
-
-//   // Add performances
-
-//   // Ferber
-//   TESTING_performances[0].push({
-//     playerId: 0,
-//     gameId: 0,
-//     wins: 6,
-//     losses: 14,
-//     gbs: 4,
-//   });
-//   TESTING_performances[1].push({
-//     playerId: 0,
-//     gameId: 1,
-//     wins: 14,
-//     losses: 10,
-//     gbs: 0,
-//   });
-//   TESTING_performances[2].push({
-//     playerId: 0,
-//     gameId: 2,
-//     wins: 11,
-//     losses: 9,
-//     gbs: 4,
-//   });
-//   TESTING_performances[3].push({
-//     playerId: 0,
-//     gameId: 3,
-//     wins: 3,
-//     losses: 8,
-//     gbs: 2,
-//   });
-//   TESTING_performances[3].push({
-//     playerId: 0,
-//     gameId: 4,
-//     wins: 0,
-//     losses: 0,
-//     gbs: 0,
-//   });
-
-//   // JD
-//   TESTING_performances[0].push({
-//     playerId: 1,
-//     gameId: 0,
-//     wins: 0,
-//     losses: 0,
-//     gbs: 0,
-//   });
-//   TESTING_performances[1].push({
-//     playerId: 1,
-//     gameId: 1,
-//     wins: 1,
-//     losses: 1,
-//     gbs: 1,
-//   });
-//   TESTING_performances[2].push({
-//     playerId: 1,
-//     gameId: 2,
-//     wins: 1,
-//     losses: 1,
-//     gbs: 1,
-//   });
-//   TESTING_performances[3].push({
-//     playerId: 1,
-//     gameId: 3,
-//     wins: 0,
-//     losses: 2,
-//     gbs: 0,
-//   });
-//   TESTING_performances[4].push({
-//     playerId: 1,
-//     gameId: 4,
-//     wins: 10,
-//     losses: 7,
-//     gbs: 4,
-//   });
-
-//   // Pete
-//   TESTING_performances[0].push({
-//     playerId: 2,
-//     gameId: 0,
-//     wins: 0,
-//     losses: 0,
-//     gbs: 0,
-//   });
-//   TESTING_performances[1].push({
-//     playerId: 2,
-//     gameId: 1,
-//     wins: 0,
-//     losses: 1,
-//     gbs: 0,
-//   });
-//   TESTING_performances[2].push({
-//     playerId: 2,
-//     gameId: 2,
-//     wins: 0,
-//     losses: 0,
-//     gbs: 0,
-//   });
-//   TESTING_performances[3].push({
-//     playerId: 2,
-//     gameId: 3,
-//     wins: 0,
-//     losses: 0,
-//     gbs: 0,
-//   });
-//   TESTING_performances[4].push({
-//     playerId: 2,
-//     gameId: 4,
-//     wins: 0,
-//     losses: 0,
-//     gbs: 0,
-//   });
-
-//   // Scott
-//   TESTING_performances[0].push({
-//     playerId: 3,
-//     gameId: 0,
-//     wins: 0,
-//     losses: 0,
-//     gbs: 2,
-//   });
-//   TESTING_performances[1].push({
-//     playerId: 3,
-//     gameId: 1,
-//     wins: 0,
-//     losses: 1,
-//     gbs: 2,
-//   });
-//   TESTING_performances[2].push({
-//     playerId: 3,
-//     gameId: 2,
-//     wins: 0,
-//     losses: 1,
-//     gbs: 3,
-//   });
-//   TESTING_performances[3].push({
-//     playerId: 3,
-//     gameId: 3,
-//     wins: 1,
-//     losses: 8,
-//     gbs: 1,
-//   });
-//   TESTING_performances[4].push({
-//     playerId: 3,
-//     gameId: 4,
-//     wins: 4,
-//     losses: 4,
-//     gbs: 3,
-//   });
-
-//   TESTING_CONFIG.enabled = true;
-// }
+  return {
+    game_id: 0,
+    opponent: "Game 1",
+    date: new Date(),
+    home: false,
+    wins: 0,
+    losses: 0,
+    gbs: 0,
+    performance: [],
+  };
+}
