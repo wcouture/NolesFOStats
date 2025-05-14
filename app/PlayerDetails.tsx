@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { Pressable, ScrollView, Text } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import GameBox from "./components/GameBox";
 import StatsBox from "./components/StatsBox";
@@ -62,6 +62,7 @@ export default function GameDetails() {
               />
             );
           })}
+          <View style={{ height: 150 }}></View>
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>

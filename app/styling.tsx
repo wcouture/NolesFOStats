@@ -31,15 +31,21 @@ export const boxCardStyle = StyleSheet.create({
   },
 
   cardTitle: {
-    fontSize: 32,
+    fontSize: 28,
     color: "white",
     fontWeight: 700,
     marginBottom: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
     textAlign: "center",
   },
 
   horizontalTitle: {
     fontSize: 20,
+    wordWrap: "wrap",
+    maxWidth: "50%",
+    paddingLeft: 5,
+    paddingRight: 5,
   },
 
   statBox: {
@@ -76,7 +82,6 @@ export const detailsStyle = StyleSheet.create({
   },
   listContainer: {
     width: "90%",
-    height: "70%",
   },
   backButton: {
     position: "static",
