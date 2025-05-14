@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "FO-Stats",
-    "slug": "FO-Stats",
+    "slug": "NolesFOStats",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/fostats-icon.png",
