@@ -94,3 +94,23 @@ export const detailsStyle = StyleSheet.create({
     textAlign: "left",
   },
 });
+
+export const toolsStyle = StyleSheet.create({
+  titleContainer: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    padding: 25,
+  },
+  titleText: {
+    fontSize: 30,
+    fontWeight: 700,
+    textShadowColor: "#782f40",
+    textShadowOffset: { width: 2, height: 2 },
+    color: "#ceb888",
+  },
+});
+
+export default function Styling() {
+  throw new Error("Function not implemented.");
+}

@@ -1,5 +1,13 @@
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import GameBox from "./components/GameBox";
 import PlayerBox from "./components/PlayerBox";
@@ -92,6 +100,16 @@ export default function Index() {
             );
           })}
         </ScrollView>
+
+        <Pressable
+          onPress={() => {
+            router.push("/Training");
+          }}
+        >
+          <View style={stylesheet.trainingButton}>
+            <Text style={stylesheet.trainingButtonText}>TRAINING TOOLS</Text>
+          </View>
+        </Pressable>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -119,5 +137,20 @@ const stylesheet = StyleSheet.create({
 
   cardContainer: {
     marginBottom: 20,
+  },
+
+  trainingButton: {
+    alignSelf: "center",
+    borderWidth: 2,
+    borderColor: "#782f40",
+    backgroundColor: "#ceb888",
+    padding: 10,
+    borderRadius: 15,
+  },
+
+  trainingButtonText: {
+    color: "#782f40",
+    fontWeight: 700,
+    fontSize: 18,
   },
 });

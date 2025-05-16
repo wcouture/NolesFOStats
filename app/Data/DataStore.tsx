@@ -52,6 +52,10 @@ export type GameData = {
 var CACHED_PLAYERS: PlayerData[] = [];
 var CACHED_GAMES: GameData[] = [];
 
+export default function DataStore() {
+  throw new Error("Function not implemented");
+}
+
 export async function GetGameList(setGameList: Function) {
   const response = await axios.get(
     "https://fo-stats.willc-dev.net/games?API=1"

@@ -6,6 +6,10 @@ export default function RootLayout() {
     <ThemeProvider value={DefaultTheme}>
       <Stack>
         <Stack.Screen
+          name="Training"
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
           name="GameDetails"
           options={{ headerShown: false }}
         ></Stack.Screen>
