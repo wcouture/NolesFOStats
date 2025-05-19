@@ -141,7 +141,7 @@ const stylesheet = StyleSheet.create({
 
   trainingButton: {
     alignSelf: "center",
-    borderWidth: 2,
+    borderWidth: 3,
     borderColor: "#782f40",
     backgroundColor: "#ceb888",
     padding: 10,
@@ -149,7 +149,9 @@ const stylesheet = StyleSheet.create({
   },
 
   trainingButtonText: {
-    color: "#782f40",
+    color: "white",
+    textShadowColor: "#782f40",
+    textShadowOffset: { height: 1.5, width: 1.5 },
     fontWeight: 700,
     fontSize: 18,
   },

@@ -96,6 +96,9 @@ export const detailsStyle = StyleSheet.create({
 });
 
 export const toolsStyle = StyleSheet.create({
+  safeAreaView: {
+    height: "auto",
+  },
   titleContainer: {
     width: "100%",
     display: "flex",
@@ -108,6 +111,49 @@ export const toolsStyle = StyleSheet.create({
     textShadowColor: "#782f40",
     textShadowOffset: { width: 2, height: 2 },
     color: "#ceb888",
+  },
+  toolButtonsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "auto",
+    marginBottom: "auto",
+  },
+  buttonRow: {
+    paddingTop: 50,
+  },
+  toolButton: {
+    alignSelf: "center",
+    padding: 10,
+    borderWidth: 2,
+    borderStyle: "solid",
+    borderColor: "#782f40",
+    borderRadius: 10,
+    backgroundColor: "#ceb888",
+    color: "white",
+    fontSize: 18,
+    fontWeight: 800,
+    textShadowColor: "#782f40",
+    textShadowOffset: { height: 1.5, width: 1.5 },
+  },
+  inputRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingBottom: 30,
+    gap: 15,
+  },
+  input: {
+    borderWidth: 1,
+    minWidth: 50,
+    fontSize: 18,
+    textAlign: "center",
+  },
+  inputHeader: {
+    textAlign: "center",
+    fontSize: 24,
+    fontWeight: 600,
+    paddingBottom: 5,
   },
 });
 

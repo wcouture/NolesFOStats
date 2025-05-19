@@ -6,6 +6,10 @@ export default function RootLayout() {
     <ThemeProvider value={DefaultTheme}>
       <Stack>
         <Stack.Screen
+          name="CadenceTraining"
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
           name="Training"
           options={{ headerShown: false }}
         ></Stack.Screen>
