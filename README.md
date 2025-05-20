@@ -5,8 +5,8 @@ Follow along with the Florida State Men's club lacrosse face-off athletes and im
 <div style="display: flex; gap: 20px; justify-content: center;">
    <img src="assets/promo-images/NolesFO-Home.png" width=200>
    <img src="assets/promo-images/NolesFO-Trainer.png" width=200>
-   <img src="assets/promo-images/phone-player-details.png" width=200>
-   <img src="assets/promo-images/phone-game-details.png" width=200>
+   <img src="assets/promo-images/player-details.png" width=200>
+   <img src="assets/promo-images/game-details.png" width=200>
 
 </div>
 
