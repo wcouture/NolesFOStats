@@ -1,19 +1,46 @@
-# Welcome to FO Stats 👋
+# Welcome to Noles FO 🥍
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Follow along with the Florida State Men's club lacrosse face-off athletes and improve skills with the included training tools. View the individual game by game performances of each face-off athlete on the FSU lacrosse team throughout the season. Use the built in whistle and random cadence tool to improve your whistle discipline!
+
+<div style="display: flex; gap: 20px; justify-content: center;">
+   <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/53/19/41/5319410d-3a34-bc96-f669-abff924a7c4a/home.png/400x800bb.png" width=200>
+   <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/d1/68/7e/d1687ebc-b420-0be0-6781-0e4ccab4a946/details.png/400x800bb.png" width=200>
+   <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/65/a7/00/65a700d8-a361-b9f4-2a68-2923e411bb39/expense.png/400x800bb.png" width=200>
+
+</div>
+
+### Download Now!
+
+[Nole FO](https://apps.apple.com/us/app/bottle-caps/id6744372300) is available for download in the IOS app store now!
+
+## Framework and Dependencies
+
+- **Package Manager**: [NPM](https://www.npmjs.com/)
+- **Build Platform**: [Expo](https://expo.dev)
+- **Framework**: [React Native](https://reactnative.dev/)
+- **Database**: [Expo SQLite](https://docs.expo.dev/versions/latest/sdk/sqlite/) <i>&</i> [Drizzle ORM](https://orm.drizzle.team/docs/overview)
+- **Charts**: [Gifted Charts](https://gifted-charts.web.app/)
 
 ## Get started
 
-1. Install dependencies
+1. <strong>Clone Repository</strong>
+
+   ```bash
+   git clone https://github.com/wcouture/bottle-caps.git
+   ```
+
+2. <strong>Install dependencies</strong>
 
    ```bash
    npm install
    ```
 
-2. Start the app
+   <i>Execute the previous command within the root directory of the cloned repository.</i>
+
+3. <strong>Start the app</strong>
 
    ```bash
-   npx expo start
+    npx expo start
    ```
 
 In the output, you'll find options to open the app in a
@@ -23,28 +50,4 @@ In the output, you'll find options to open the app in a
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Source files are located within the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Noles FO",
     "slug": "NolesFOStats",
-    "version": "1.0.1",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/fostats-icon.png",
     "scheme": "nolesfostats",
@@ -43,8 +43,8 @@
         "expo-font",
         {
           "fonts": [
-            "/assets/fonts/PlaypenSansDeva-VariableFont_wght.ttf",
-            "/assets/fonts/SpaceMono-Regular.ttf"
+            "assets/fonts/PlaypenSansDeva-VariableFont_wght.ttf",
+            "assets/fonts/SpaceMono-Regular.ttf"
           ]
         }
       ]
