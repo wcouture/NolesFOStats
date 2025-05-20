@@ -114,7 +114,14 @@ export default function CadenceTraining() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={detailsStyle.safeArea}>
-        <Text style={detailsStyle.backButtonText}>{"<"}</Text>
+        <Text
+          onPress={() => {
+            router.back();
+          }}
+          style={detailsStyle.backButtonText}
+        >
+          {"<"}
+        </Text>
         <Text style={styleSheet.repTrackerLabel}>
           {repsDone} / {repCount}
         </Text>

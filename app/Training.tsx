@@ -37,6 +37,14 @@ export default function Training() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={toolsStyle.safeAreaView}>
+        <Text
+          onPress={() => {
+            router.back();
+          }}
+          style={toolsStyle.backButton}
+        >
+          {"<"}
+        </Text>
         <View style={toolsStyle.titleContainer}>
           <Text style={toolsStyle.titleText}>Face Off Training</Text>
         </View>

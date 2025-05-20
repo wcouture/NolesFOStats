@@ -101,12 +101,13 @@ export const detailsStyle = StyleSheet.create({
 export const toolsStyle = StyleSheet.create({
   safeAreaView: {
     height: "auto",
+    margin: 50,
   },
   titleContainer: {
     width: "100%",
     display: "flex",
     alignItems: "center",
-    padding: 25,
+    paddingBottom: 25,
   },
   titleText: {
     fontSize: 30,
@@ -164,6 +165,17 @@ export const toolsStyle = StyleSheet.create({
     borderBottomWidth: 1,
     minWidth: "60%",
     minHeight: 50,
+  },
+
+  backButton: {
+    width: "100%",
+
+    fontFamily: "PlaypenSansDeva",
+    fontSize: 35,
+    fontWeight: 300,
+    color: "grey",
+
+    marginTop: -25,
   },
 });
 
