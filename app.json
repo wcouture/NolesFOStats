@@ -38,7 +38,16 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "expo-audio"
+      "expo-audio",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "/assets/fonts/PlaypenSansDeva-VariableFont_wght.ttf",
+            "/assets/fonts/SpaceMono-Regular.ttf"
+          ]
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

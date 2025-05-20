@@ -88,7 +88,10 @@ export const detailsStyle = StyleSheet.create({
     bottom: 0,
   },
   backButtonText: {
-    fontSize: 20,
+    fontSize: 35,
+    fontWeight: 300,
+    fontFamily: "PlaypenSansDeva",
+    top: -30,
     color: "grey",
     width: "100%",
     textAlign: "left",
@@ -154,6 +157,13 @@ export const toolsStyle = StyleSheet.create({
     fontSize: 24,
     fontWeight: 600,
     paddingBottom: 5,
+  },
+
+  divider50: {
+    borderBottomColor: "#999",
+    borderBottomWidth: 1,
+    minWidth: "60%",
+    minHeight: 50,
   },
 });
 

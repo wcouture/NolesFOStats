@@ -12,12 +12,12 @@ export default function Training() {
   const whistlePlayer = useAudioPlayer(whistleAudioSource);
 
   const [minToSet, setMinToSet] = useState(1);
-  const [maxToSet, setMaxToSet] = useState(1);
+  const [maxToSet, setMaxToSet] = useState(3);
 
   const [minToWhistle, setMinToWhistle] = useState(1);
-  const [maxToWhistle, setMaxToWhistle] = useState(1);
+  const [maxToWhistle, setMaxToWhistle] = useState(3);
 
-  const [timeBetween, setTimeBetween] = useState(1);
+  const [timeBetween, setTimeBetween] = useState(10);
 
   const [whistleCount, setWhistleCount] = useState(10);
 
@@ -30,7 +30,7 @@ export default function Training() {
 
   const BeginCadence = () => {
     router.push(
-      `/CadenceTraining?minSet=${minToSet}&maxSet=${maxToSet}&minWhistle=${minToWhistle}&maxWhistle=${maxToWhistle}&between=${timeBetween}`
+      `/CadenceTraining?minSet=${minToSet}&maxSet=${maxToSet}&minWhistle=${minToWhistle}&maxWhistle=${maxToWhistle}&between=${timeBetween}&count=${whistleCount}`
     );
   };
 
@@ -43,9 +43,10 @@ export default function Training() {
         <View style={toolsStyle.toolButtonsContainer}>
           <View style={toolsStyle.buttonRow}>
             <Text style={toolsStyle.toolButton} onPress={PlayWhistle}>
-              Whistle
+              Whistle 🔉
             </Text>
           </View>
+          <View style={toolsStyle.divider50} />
           <View style={toolsStyle.buttonRow}>
             <Text style={toolsStyle.inputHeader}>Time to set:</Text>
             <View style={toolsStyle.inputRow}>
@@ -116,7 +117,7 @@ export default function Training() {
             </View>
 
             <Text style={toolsStyle.toolButton} onPress={BeginCadence}>
-              Start Cadence Trainig
+              Start Cadence Training
             </Text>
           </View>
         </View>
