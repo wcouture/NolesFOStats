@@ -26,7 +26,7 @@ Follow along with the Florida State Men's club lacrosse face-off athletes and im
 1. <strong>Clone Repository</strong>
 
    ```bash
-   git clone https://github.com/wcouture/bottle-caps.git
+   git clone https://github.com/wcouture/NolesFOStats.git
    ```
 
 2. <strong>Install dependencies</strong>
