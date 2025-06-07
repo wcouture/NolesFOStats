@@ -2,6 +2,8 @@
 
 Follow along with the Florida State Men's club lacrosse face-off athletes and improve skills with the included training tools. View the individual game by game performances of each face-off athlete on the FSU lacrosse team throughout the season. Use the built in whistle and random cadence tool to improve your whistle discipline!
 
+Noles FO was built utilizing the ReactNative framework and the Expo build system. Using the Axios Http library, in junction with the PHP-based API behind https://fo-stats.willc-dev.net, allowed for the seamless retrieval of player and game data.
+
 <div style="display: flex; gap: 20px; justify-content: center;">
    <img src="assets/promo-images/NolesFO-Home.png" width=200>
    <img src="assets/promo-images/NolesFO-Trainer.png" width=200>
